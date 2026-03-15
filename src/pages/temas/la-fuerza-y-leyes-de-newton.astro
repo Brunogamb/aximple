@@ -1,0 +1,403 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const tema = {
+    titulo: "Fuerza",
+    definicion: "Magnitud vectorial: cualquier acción que haga que un cuerpo se mueva, se detenga o deforme. Se mide en newtons (N).",
+    formula: "$F = m \\cdot a$",
+    leyes: [
+        { t: "1ª Inercia", d: "Los objetos no se moverán o detendrán hasta que una fuerza externa actué sobre ellos. La masa del objeto mide su resistencia al cambio." },
+        { t: "2ª Masa", d: "Para que algo gane velocidad, se necesita aplicar fuerza. Cuanta mayor sea la masa del objeto, más fuerza se requerirá para lograr la aceleración. " },
+        { t: "3ª Reacción", d: "Las fuerzas siempre actúan en parejas. Si se aplica una fuerza (acción), se recibe una respuesta de otra fuerza igual y opuesta (reacción)." },
+    ],
+    comunes: [
+        { t: "Peso", d: "Fuerza con la que la Tierra nos tira hacia su centro. No es lo mismo que masa, el peso depende de la gravedad. $P = m \\cdot g$" },
+        { t: "Normal", d: "Fuerza de reacción que ejerce una superficie al ejercer fuerza sobre ella. Si no existiera, se atravesaría." },
+        { t: "Tensión", d: "Fuerza presente en cuerdas, cables o cadenas al estirarlas. Se transmite de un extremo al otro de forma idéntica, siendo la fuerza opuesta a la aplicada originalmente." },
+        { t: "Rozamiento", d: "Fuerza que se opone al movimiento entre 2 superficies. Depende de la rugosidad y de la fuerza Normal. <br/><a href='/aximple/temas/rozamiento' class='btn-more'>Saber más →</a>" },
+    ]
+};
+---
+
+<Layout title={tema.titulo}>
+    <main class="content-wrapper">
+        <section class="hero-section">
+            <div class="hero-main">
+                <h1>{tema.titulo}</h1>
+                <p class="description">{tema.definicion}</p>
+                <div class="main-formula" set:html={tema.formula} />
+            </div>
+            <div class="hero-sidebar">
+                <div class="specs-table">
+                    <div class="spec-row"><span>Fuerza</span> <strong>N</strong></div>
+                    <div class="spec-row"><span>Masa</span> <strong>kg</strong></div>
+                    <div class="spec-row"><span>Aceleración</span> <strong>m/s²</strong></div>
+                    <div class="spec-footer">$1N = 1kg \cdot m/s^2$</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bento-layout">
+            <div class="card wide">
+                <h2>Leyes de Newton</h2>
+                <div class="columns-3">
+                    {tema.leyes.map(l => (
+                        <div class="item">
+                            <strong class="text-cyan">{l.t}</strong>
+                            <p>{l.d}</p>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Diagrama de Cuerpo Libre</h2>
+                <p>Representación gráfica de todas las fuerzas que actúan sobre un objeto. Se dibuja el cuerpo aislado y se trazan flechas (vectores) que representan cada fuerza aplicada.</p>
+                
+                <div class="dcl-canvas">
+                    <div class="vector v-up"><span class="label">$N$</span></div>
+                    <div class="vector v-down"><span class="label">$P$</span></div>
+                    <div class="vector v-right"><span class="label">$F$</span></div>
+                    <div class="vector v-left"><span class="label">$f_r$</span></div>
+                    
+                    <div class="body-node"></div>
+                    
+                    <div class="guide-x"></div>
+                    <div class="guide-y"></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Plano Inclinado</h2>
+                <p>Si un cuerpo se encuentra en una superficie inclinada, su peso se descompone en dos direcciones:</p>
+                <div class="stack-list">
+                    <div class="sub-item">
+                        <div class="item-text">
+                            <strong class="text-cyan">$P_y$ (Perpendicular)</strong>
+                            <p>Presiona el objeto contra la rampa.</p>
+                        </div>
+                        <span class="math-val">$m \cdot g \cdot \cos(\theta)$</span>
+                    </div>
+                    <div class="sub-item">
+                        <div class="item-text">
+                            <strong class="text-cyan">$P_x$ (Paralela)</strong>
+                            <p>Tira del objeto rampa abajo.</p>
+                        </div>
+                        <span class="math-val">$m \cdot g \cdot \sin(\theta)$</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card wide">
+                <h2>Fuerzas Comunes</h2>
+                <div class="columns-4">
+                    {tema.comunes.map(f => (
+                        <div class="item">
+                            <strong class="text-cyan">{f.t}</strong>
+                            <p set:html={f.d} />
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            <div class="card wide banner">
+                <div class="banner-inner">
+                    <div class="banner-col">
+                        <h2>Fuerza Neta</h2>
+                        <p>Suma de todas las fuerzas que actúan al mismo tiempo sobre un cuerpo. Si las fuerzas tienen la misma dirección, se suman; si son opuestas, se restan.</p>
+                    </div>
+                    <div class="banner-col">
+                        <h2>Equilibrio</h2>
+                        <div class="equilibrium-content">
+                            <p>Es el estado donde la suma de todas las fuerzas es igual a cero. El cuerpo no acelera: o está totalmente quieto o se mueve en línea recta con velocidad constante.</p>
+                            <div class="equilibrium-badge">
+                                <strong>$\sum F = 0$</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</Layout>
+
+<style>
+    .content-wrapper {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 4rem 1.5rem;
+    }
+
+    .bento-layout {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+    }
+
+    .hero-section {
+        display: grid;
+        grid-template-columns: 1.6fr 1fr;
+        gap: 3rem;
+        margin-bottom: 2rem;
+        padding: 3rem;
+        background: var(--card-bg-glass);
+        border: 1px solid var(--border-soft);
+        border-radius: 24px;
+    }
+
+    h1 {
+        font-size: 5rem;
+        line-height: 1;
+        letter-spacing: -2px;
+        margin-bottom: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.75rem;
+        margin-bottom: 1.5rem;
+        letter-spacing: -0.5px;
+    }
+
+    p { color: var(--text-muted); line-height: 1.5; } 
+
+    .description {
+        font-size: 1.25rem;
+        margin-bottom: 2rem;
+    }
+
+    .main-formula {
+        font-size: 3rem;
+        font-weight: 700;
+        color: var(--accent-secondary);
+    }
+
+    .text-cyan {
+        font-size: 1.15rem;
+        color: var(--accent);
+    }
+
+    .card {
+        padding: 2.5rem;
+        background: var(--card-bg);
+        border: 1px solid var(--border-soft);
+        border-radius: 24px;
+    }
+
+    .wide { grid-column: span 2; }
+
+    .columns-3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+    }
+
+    .columns-4 {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem;
+    }
+
+    .specs-table {
+        padding: 2rem;
+        background: var(--bg-dark);
+        border: 1px solid var(--border-soft);
+        border-radius: 20px;
+    }
+
+    .spec-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid var(--border-soft);
+    }
+
+    .spec-row span { color: var(--text-muted); }
+    .spec-row strong { color: var(--accent-secondary); }
+
+    .spec-footer {
+        margin-top: 1.5rem;
+        text-align: center;
+        font-family: monospace;
+        font-size: 0.9rem;
+        color: var(--text-muted);
+    }
+
+    .dcl-canvas {
+        position: relative;
+        height: 200px;
+        margin-top: 1.5rem;
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        border: 1px solid var(--border-soft);
+    }
+
+    .body-node {
+        width: 12px;
+        height: 12px;
+        background: #fff;
+        border-radius: 50%;
+        z-index: 10;
+        box-shadow: 0 0 15px var(--accent);
+    }
+
+    .guide-x, .guide-y {
+        position: absolute;
+        background: rgba(255, 255, 255, 0.05);
+    }
+    .guide-x { width: 80%; height: 1px; border-top: 1px dashed rgba(255,255,255,0.2); }
+    .guide-y { height: 80%; width: 1px; border-left: 1px dashed rgba(255,255,255,0.2); }
+
+    .vector {
+        position: absolute;
+        background: var(--accent);
+        transition: transform 0.3s ease;
+    }
+
+    .vector::after {
+        content: '';
+        position: absolute;
+        border: 5px solid transparent;
+    }
+
+    .label {
+        position: absolute;
+        font-size: 0.8rem;
+        color: var(--accent-secondary);
+        font-family: serif;
+        font-weight: bold;
+    }
+
+    .v-up {
+        width: 2px;
+        height: 50px;
+        bottom: 50%;
+        background: linear-gradient(to top, var(--accent), var(--accent-secondary));
+    }
+    .v-up::after {
+        border-bottom-color: var(--accent-secondary);
+        top: -10px; left: -4px;
+    }
+    .v-up .label { top: -20px; left: 10px; }
+
+    .v-down {
+        width: 2px;
+        height: 60px;
+        top: 50%;
+        background: linear-gradient(to bottom, var(--accent), #ff4d4d);
+    }
+    .v-down::after {
+        border-top-color: #ff4d4d;
+        bottom: -10px; left: -4px;
+    }
+    .v-down .label { bottom: -20px; left: 10px; }
+
+    .v-right {
+        height: 2px;
+        width: 70px;
+        left: 50%;
+        background: var(--accent-secondary);
+    }
+    .v-right::after {
+        border-left-color: var(--accent-secondary);
+        right: -10px; top: -4px;
+    }
+    .v-right .label { right: 0; top: -20px; }
+
+    .v-left {
+        height: 2px;
+        width: 40px;
+        right: 50%;
+        background: rgba(255,255,255,0.4);
+    }
+    .v-left::after {
+        border-right-color: rgba(255,255,255,0.4);
+        left: -10px; top: -4px;
+    }
+    .v-left .label { left: 0; top: 10px; }
+
+    .stack-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin-top: 1.5rem;
+    }
+
+    .sub-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+        background: var(--bg-dark);
+        border-radius: 12px;
+        border: 1px solid var(--border-soft);
+    }
+
+    .item-text p { font-size: 0.85rem; margin-top: 0.2rem; }
+    .math-val { color: var(--accent-secondary); font-family: monospace; font-weight: bold; }
+
+    .banner {
+        background: linear-gradient(to right, var(--bg-dark), var(--accent-glow));
+        border-color: var(--border-accent);
+    }
+
+    .banner-inner {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+    }
+
+    .equilibrium-content {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .equilibrium-badge {
+        padding: 1rem;
+        text-align: center;
+        background: var(--accent-secondary);
+        color: var(--text-dark);
+        border-radius: 12px;
+        align-self: flex-start;
+        min-width: 140px;
+    }
+
+    .equilibrium-badge strong { font-size: 1.4rem; font-family: monospace; }
+
+    @media (max-width: 900px) {
+        .hero-section, .columns-3, .columns-4, .bento-layout, .banner-inner {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        .wide { grid-column: auto; }
+        h1 { font-size: 3.5rem; }
+        .hero-section { padding: 2rem; }
+    }
+</style>
+
+<style is:global> 
+    .btn-more {
+        display: inline-block;
+        margin-top: 1rem;
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+        font-weight: bold;
+        color: var(--accent);
+        border: 1px solid var(--accent);
+        border-radius: 8px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        background: rgba(0, 255, 255, 0.1);
+        cursor: pointer;
+    }
+
+    .btn-more:hover {
+        background: var(--accent);
+        color: var(--text-dark);
+        box-shadow: 0 0 10px var(--accent);
+    }
+</style>

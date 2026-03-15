@@ -1,0 +1,137 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const temaPrincipal = {
+    title: "La Fuerza y Leyes de Newton",
+    desc: "Magnitud vectorial, las tres leyes del movimiento, fuerzas comunes y diagramas de cuerpo libre.",
+    slug: "la-fuerza-y-leyes-de-newton"
+};
+---
+
+<Layout title="Temas - Aximple">
+    <main class="library-container">
+        <h1 class="hero-title">Temas</h1></span>
+
+        <section class="main-access">
+            <a href={`/aximple/temas/${temaPrincipal.slug}`} class="main-card">
+                <div class="card-content">
+                    <span class="status">TEMA 1</span>
+                    <h2>{temaPrincipal.title}</h2>
+                    <p>{temaPrincipal.desc}</p>
+                </div>
+                <div class="card-arrow">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+                </div>
+            </a>
+            
+            <div class="coming-soon">
+                <p>Próximos temas en desarrollo...</p>
+            </div>
+        </section>
+    </main>
+</Layout>
+
+<style>
+    .library-container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 6rem 2rem;
+    }
+
+    .hero-title {
+        font-size: 5rem;
+        font-weight: 800;
+        letter-spacing: -0.04em;
+        margin-bottom: 4rem;
+        color: var(--text-main);
+    }
+
+    .main-access {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .main-card {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 4rem;
+        background: var(--card-bg);
+        border: 1px solid var(--border-soft);
+        border-radius: 32px;
+        text-decoration: none;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .main-card:hover {
+        background: var(--card-hover);
+        border-color: var(--accent);
+        transform: translateY(-4px);
+        box-shadow: 0 10px 40px -10px var(--accent-glow);
+    }
+
+    .status {
+        color: var(--accent-secondary);
+        font-weight: 900;
+        font-size: 0.8rem;
+        letter-spacing: 2px;
+        display: block;
+        margin-bottom: 1rem;
+    }
+
+    .card-content h2 {
+        font-size: 2.5rem;
+        color: var(--text-main);
+        margin-bottom: 1rem;
+        font-weight: 800;
+        letter-spacing: -1px;
+    }
+
+    .card-content p {
+        font-size: 1.25rem;
+        color: var(--text-muted);
+        max-width: 50ch;
+        line-height: 1.5;
+    }
+
+    .card-arrow {
+        color: var(--accent);
+        transition: transform 0.3s ease;
+    }
+
+    .main-card:hover .card-arrow {
+        transform: translateX(10px);
+    }
+
+    .coming-soon {
+        padding: 2rem;
+        border: 1px dashed var(--border-soft);
+        border-radius: 20px;
+        text-align: center;
+        color: var(--text-muted);
+        opacity: 0.6;
+        font-size: 1rem;
+    }
+
+    @media (max-width: 768px) {
+        .hero-title { 
+            font-size: 3.5rem; 
+        }
+        
+        .main-card { 
+            padding: 2.5rem; 
+            flex-direction: column; 
+            align-items: flex-start; 
+            gap: 2rem; 
+        }
+        
+        .card-content h2 { 
+            font-size: 2rem; 
+        }
+        
+        .card-arrow { 
+            display: none; 
+        }
+    }
+</style>

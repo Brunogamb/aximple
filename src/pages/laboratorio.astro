@@ -1,0 +1,92 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Laboratorio - Aximple">
+    <main class="lab-minimal">
+        <div class="status-pill">PRÓXIMAMENTE</div>
+        
+        <h1 class="huge-title">
+            LABORATORIO<br/>
+            <span class="text-gradient">EN DESARROLLO.</span>
+        </h1>
+
+        <p class="simple-desc">
+            Estamos destilando los casos complejos. 
+            Pronto, la teoría en acción.
+        </p>
+
+        <a href="/aximple/" class="btn-back">Volver al Inicio</a>
+    </main>
+</Layout>
+
+<style>
+    .lab-minimal {
+        height: 80vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 0 2rem;
+    }
+
+    .status-pill {
+        color: var(--accent-secondary);
+        font-weight: 900;
+        font-size: 0.8rem;
+        letter-spacing: 3px;
+        margin-bottom: 2rem;
+        border: 1px solid var(--secondary-glow);
+        padding: 0.5rem 1.5rem;
+        border-radius: 100px;
+        background: rgba(var(--white-rgb), 0.02);
+    }
+
+    .huge-title {
+        font-size: clamp(2.5rem, 8vw, 5.5rem);
+        font-weight: 850;
+        line-height: 1;
+        letter-spacing: -0.04em;
+        color: var(--text-main);
+        margin-bottom: 1.5rem;
+    }
+
+    .text-gradient {
+        background: var(--gradient-brand);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        display: inline-block;
+    }
+
+    .simple-desc {
+        font-size: 1.25rem;
+        color: var(--text-muted);
+        max-width: 650px;
+        margin: 0 auto 3rem;
+        line-height: 1.6;
+    }
+
+    .btn-back {
+        color: var(--accent-secondary);
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 1.1rem;
+        opacity: 0.8;
+        transition: all 0.2s ease;
+        border-bottom: 1px solid transparent;
+    }
+
+    .btn-back:hover {
+        opacity: 1;
+        color: var(--text-main);
+        border-bottom-color: var(--accent-secondary);
+    }
+
+    @media (max-width: 768px) {
+        .huge-title { 
+            font-size: 4rem; 
+            letter-spacing: -2px; 
+        }
+    }
+</style>
