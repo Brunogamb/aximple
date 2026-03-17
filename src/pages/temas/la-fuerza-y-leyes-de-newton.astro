@@ -211,8 +211,9 @@ const tema = {
         border-bottom: 1px solid var(--border-soft);
     }
 
-    .spec-row span { color: var(--text-muted); }
-    .spec-row strong { color: var(--accent-secondary); }
+    .spec-row strong { 
+        color: var(--accent-secondary); 
+    }
 
     .spec-footer {
         margin-top: 1.5rem;
@@ -248,12 +249,21 @@ const tema = {
         position: absolute;
         background: rgba(255, 255, 255, 0.05);
     }
-    .guide-x { width: 80%; height: 1px; border-top: 1px dashed rgba(255,255,255,0.2); }
-    .guide-y { height: 80%; width: 1px; border-left: 1px dashed rgba(255,255,255,0.2); }
+    .guide-x { 
+        width: 80%; 
+        height: 1px; 
+        border-top: 1px dashed rgba(255,255,255,0.2); 
+    }
+
+    .guide-y { 
+        height: 80%; 
+        width: 1px; 
+        border-left: 1px dashed rgba(255,255,255,0.2); 
+    }
 
     .vector {
         position: absolute;
-        background: var(--accent);
+        background: var( --accent);
         transition: transform 0.3s ease;
     }
 

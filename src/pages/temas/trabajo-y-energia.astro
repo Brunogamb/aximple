@@ -1,0 +1,364 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const tema = {
+    titulo: "Energía y Trabajo",
+    definicion: "Capacidad de los cuerpos para realizar un trabajo o generar cambios en su entorno (como mover algo, calentarlo o deformarlo). La energía no se crea ni se destruye, solo se transforma. Se mide en Joules (J).",
+    formula: "$W = F \\cdot d \\cdot \\cos(\\theta)$",
+    conceptos: [
+        { t: "Energía Cinética", d: "Es la energía del movimiento. Depende de la masa y de la velocidad al cuadrado. Si un objeto duplica su velocidad, su energía se cuadruplica. $E_c = \\frac{1}{2} m v^2$" },
+        { t: "Energía Potencial", d: "Es la energía de la posición (altura). Depende del peso del objeto y de qué tan lejos esté del suelo. Al caer, esta energía acumulada se libera. $E_p = m \\cdot g \\cdot h$" },
+        { t: "Energía Mecánica", d: "Es la suma de ambas ($E_c + E_p$). En sistemas ideales sin roce, esta suma se mantiene constante en todo momento." },
+    ],
+    detalles: [
+        { t: "Trabajo (W)", d: "Solo hay trabajo si la fuerza genera desplazamiento. Si empujas algo y no se mueve, el trabajo es **cero**." },
+        { t: "Potencia (P)", d: "Mide la rapidez con la que se transfiere energía. Se mide en Watts. <br/>$P = W / t$" },
+        { t: "Teorema W-Ec", d: "El trabajo total realizado es igual a la variación de la energía cinética del cuerpo. $\\Delta E_c = W$" },
+        { t: "Rendimiento", d: "Relación entre energía útil y total. Nunca es 100% debido al calor generado por el roce. $\\eta = W_u/E_t$" },
+    ]
+};
+---
+
+<Layout title={tema.titulo}>
+    <main class="content-wrapper">
+        <section class="hero-section">
+            <div class="hero-main">
+                <h1>{tema.titulo}</h1>
+                <p class="description">{tema.definicion}</p>
+                <div class="main-formula" set:html={tema.formula} />
+            </div>
+            <div class="hero-sidebar">
+                <div class="specs-table">
+                    <div class="spec-row"><span>Trabajo</span> <strong>J</strong></div>
+                    <div class="spec-row"><span>Potencia</span> <strong>W</strong></div>
+                    <div class="spec-row"><span>Energía</span> <strong>J</strong></div>
+                    <div class="spec-footer">$1J = 1N \cdot 1m$</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bento-layout">
+            <div class="card wide">
+                <h2>Formas de Energía</h2>
+                <div class="columns-3">
+                    {tema.conceptos.map(c => (
+                        <div class="item">
+                            <strong class="text-cyan">{c.t}</strong>
+                            <p set:html={c.d} />
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Trabajo según el Ángulo</h2>
+                <p>La fuerza solo realiza trabajo si tiene una componente en la dirección del movimiento. Si la fuerza es perpendicular ($\theta = 90^\circ$), el trabajo es nulo.</p>
+                
+                <div class="dcl-canvas energy-variant">
+                    <div class="vector v-angle"><span class="label">$F$</span></div>
+                    <div class="body-node"></div>
+                    <div class="guide-x"></div>
+                    <div class="motion-arrow">Movimiento ➔</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Conservación</h2>
+                <p>En ausencia de rozamiento, la energía potencial se transforma íntegramente en cinética y viceversa:</p>
+                <div class="stack-list">
+                    <div class="sub-item">
+                        <div class="item-text">
+                            <strong class="text-cyan">Punto Máximo</strong>
+                            <p>Altura máxima, velocidad cero.</p>
+                        </div>
+                        <span class="math-val" is:raw>$E_p \text{ máx}$</span>
+                    </div>
+                    <div class="sub-item">
+                        <div class="item-text">
+                            <strong class="text-cyan">Punto Mínimo</strong>
+                            <p>Altura cero, velocidad máxima.</p>
+                        </div>
+                        <span class="math-val" is:raw>$E_c \text{ máx}$</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card wide">
+                <h2>Conceptos Clave</h2>
+                <div class="columns-4">
+                    {tema.detalles.map(d => (
+                        <div class="item">
+                            <strong class="text-cyan">{d.t}</strong>
+                            <p set:html={d.d} />
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            <div class="card wide banner energy-banner">
+                <div class="banner-inner">
+                    <div class="banner-col">
+                        <h2>El Joule (J)</h2>
+                        <p>Es la unidad universal. Equivale al trabajo necesario para mover un objeto con una fuerza de 1 Newton a lo largo de 1 metro.</p>
+                    </div>
+                    <div class="banner-col">
+                        <h2>Disipación</h2>
+                        <div class="equilibrium-content">
+                            <p>En la vida real, el rozamiento transforma parte de la energía mecánica en <strong>calor</strong>, reduciendo la energía útil disponible.</p>
+                            <div class="equilibrium-badge">
+                                <strong is:raw>$W_{fr} \to Q$</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</Layout>
+
+<style>
+    .content-wrapper { 
+        max-width: 1000px; 
+        margin: 0 auto; 
+        padding: 4rem 1.5rem; 
+    }
+
+    .bento-layout { 
+        display: grid; 
+        grid-template-columns: 1fr 1fr; 
+        gap: 1.5rem; 
+    }
+
+    .hero-section {
+        display: grid; 
+        grid-template-columns: 1.6fr 1fr; 
+        gap: 3rem;
+        margin-bottom: 2rem; 
+        padding: 3rem;
+        background: var(--card-bg-glass); 
+        border: 1px solid var(--border-soft); 
+        border-radius: 24px;
+    }
+
+    h1 { 
+        font-size: 5rem; 
+        line-height: 1; 
+        letter-spacing: -2px; 
+        margin-bottom: 1.5rem; 
+    }
+
+    h2 { 
+        font-size: 1.75rem; 
+        margin-bottom: 1.5rem; 
+        letter-spacing: -0.5px; 
+    }
+
+    p { 
+        color: var(--text-muted); 
+        line-height: 1.5; 
+    } 
+
+    .description { 
+        font-size: 1.25rem;
+        margin-bottom: 2rem; 
+    }
+
+    .main-formula { 
+        font-size: 3rem; 
+        font-weight: 700; 
+        color: var(--accent-secondary); 
+    }
+
+    .text-cyan { 
+        font-size: 1.15rem; 
+        color: var(--accent); 
+    }
+
+    .card { 
+        padding: 2.5rem; 
+        background: var(--card-bg); 
+        border: 1px solid var(--border-soft);
+        border-radius: 24px; 
+    }
+
+    .wide { 
+        grid-column: span 2; 
+    }
+
+    .columns-3 { 
+        display: grid; 
+        grid-template-columns: repeat(3, 1fr); 
+        gap: 2rem; 
+    }
+
+    .columns-4 { 
+        display: grid; 
+        grid-template-columns: repeat(4, 1fr); 
+        gap: 1.5rem; 
+    }
+
+    .specs-table { 
+        padding: 2rem; 
+        background: var(--bg-dark); 
+        border: 1px solid var(--border-soft); 
+        border-radius: 20px; 
+    }
+
+    .spec-row { 
+        display: flex; 
+        justify-content: space-between; 
+        padding: 0.75rem 0; 
+        border-bottom: 1px solid var(--border-soft); 
+    }
+
+    .spec-row strong { 
+        color: var(--accent-secondary); 
+    }
+
+    .spec-footer { 
+        margin-top: 1.5rem; 
+        text-align: center; 
+        font-family: monospace; 
+        font-size: 0.9rem; 
+        color: var(--text-muted); 
+    }
+
+    .dcl-canvas {
+        position: relative; 
+        height: 200px; 
+        margin-top: 1.5rem;
+        background: rgba(0, 0, 0, 0.2); 
+        border-radius: 16px;
+        display: flex; 
+        align-items: center; 
+        justify-content: center;
+        border: 1px solid var(--border-soft);
+    }
+
+    .body-node { 
+        width: 12px; 
+        height: 12px; 
+        background: #fff; 
+        border-radius: 50%; 
+        z-index: 10; 
+        box-shadow: 0 0 15px var(--accent); 
+    }
+
+    .guide-x { 
+        position: absolute; 
+        width: 80%; 
+        height: 1px; 
+        border-top: 1px dashed rgba(255,255,255,0.2); 
+    }
+
+    .motion-arrow { 
+        position: absolute; 
+        bottom: 20px; 
+        right: 20px; 
+        font-size: 0.7rem; 
+        color: var(--accent); 
+        letter-spacing: 1px; 
+    }
+
+    .v-angle {
+        position: absolute; 
+        width: 80px; 
+        height: 2px; 
+        left: 50%;
+        background: var(--accent-secondary); 
+        transform-origin: left;
+        transform: rotate(-35deg);
+    }
+
+    .v-angle::after {
+        content: ''; 
+        position: absolute; 
+        right: -8px; 
+        top: -4px;
+        border: 5px solid transparent; 
+        border-left-color: var(--accent-secondary);
+    }
+
+    .v-angle .label { 
+        position: absolute; 
+        right: 0; 
+        top: -25px; 
+        transform: rotate(35deg); 
+        font-family: serif; 
+        font-weight: bold; 
+    }
+
+    .stack-list { 
+        display: flex; 
+        flex-direction: column; 
+        gap: 1rem; 
+        margin-top: 1.5rem; 
+    }
+
+    .sub-item {
+        display: flex; 
+        justify-content: space-between; 
+        align-items: center;
+        padding: 1rem; 
+        background: var(--bg-dark); 
+        border-radius: 12px; 
+        border: 1px solid var(--border-soft);
+    }
+
+    .math-val { 
+        color: var(--accent-secondary); 
+        font-family: monospace; 
+        font-weight: bold; 
+    }
+
+    .energy-banner {
+        background: linear-gradient(to left, var(--bg-dark), var(--accent-glow));
+        border-color: var(--border-soft);
+    }
+
+    .banner-inner { 
+        display: grid; 
+        grid-template-columns: 1fr 1fr; 
+        gap: 4rem; 
+    }
+
+    .equilibrium-content {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .equilibrium-badge {
+        padding: 1rem; 
+        text-align: center; 
+        background: var(--accent-secondary); 
+        color: #000; 
+        border-radius: 12px; 
+        align-self: flex-start;
+        min-width: 140px;
+    }
+
+    .equilibrium-badge strong { 
+        font-size: 1.4rem; 
+        font-family: monospace; 
+    }
+
+    @media (max-width: 900px) {
+        .hero-section, 
+        .columns-3, 
+        .columns-4, 
+        .bento-layout, 
+        .banner-inner { 
+            grid-template-columns: 1fr; 
+            gap: 2rem; 
+        }
+        
+        .wide { 
+            grid-column: auto; 
+        }
+        
+        h1 { 
+            font-size: 3.5rem; 
+        }
+    }
+</style>

@@ -1,28 +1,41 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-const temaPrincipal = {
-    title: "La Fuerza y Leyes de Newton",
-    desc: "Magnitud vectorial, las tres leyes del movimiento, fuerzas comunes y diagramas de cuerpo libre.",
-    slug: "la-fuerza-y-leyes-de-newton"
-};
+const temas = [
+    {
+        numero: "TEMA 1",
+        title: "La Fuerza y Leyes de Newton",
+        desc: "Magnitud vectorial, las tres leyes del movimiento, fuerzas comunes y diagramas de cuerpo libre.",
+        slug: "la-fuerza-y-leyes-de-newton"
+    },
+    {
+        numero: "TEMA 2",
+        title: "Trabajo y Energía",
+        desc: "Energía cinética y potencial, potencia mecánica, conservación de la energía y rendimiento.",
+        slug: "trabajo-y-energia"
+    }
+];
 ---
 
 <Layout title="Temas - Aximple">
     <main class="library-container">
-        <h1 class="hero-title">Temas</h1></span>
+        <h1 class="hero-title">Temas</h1>
 
         <section class="main-access">
-            <a href={`/aximple/temas/${temaPrincipal.slug}`} class="main-card">
-                <div class="card-content">
-                    <span class="status">TEMA 1</span>
-                    <h2>{temaPrincipal.title}</h2>
-                    <p>{temaPrincipal.desc}</p>
-                </div>
-                <div class="card-arrow">
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
-                </div>
-            </a>
+            {temas.map((tema) => (
+                <a href={`/aximple/temas/${tema.slug}`} class="main-card">
+                    <div class="card-content">
+                        <span class="status">{tema.numero}</span>
+                        <h2>{tema.title}</h2>
+                        <p>{tema.desc}</p>
+                    </div>
+                    <div class="card-arrow">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 12h14m-7-7 7 7-7 7"/>
+                        </svg>
+                    </div>
+                </a>
+            ))}
             
             <div class="coming-soon">
                 <p>Próximos temas en desarrollo...</p>
